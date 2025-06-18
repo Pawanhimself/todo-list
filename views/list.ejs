@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Todo Master</h1>
+    </header>
+    
+    <div class="add-task">
+        <form action="" method="post">
+            <input class="task-input" type="text" name="task" placeholder="Enter task" id="task" required>
+            <button class="submit-btn" type="submit">Add Task</button>
+        </form>
+    </div>
+
+    <div class="task-container">
+       <% for(let i=0;i<items.length; i++){ %>
+        <div class="task-box">
+            <div class="task">
+                <div onclick="udpateTaskStatus(this, <%= i %>)">
+                    <% if (items[i].status == 'completed') { %>
+                        <input type="checkbox" checked>                        
+                     <% } else { %>
+                        <input type="checkbox">
+                    <% } %>                      
+                </div>
+                <div>
+                    <% if (items[i].status == 'completed') { %>
+                        <p style="text-decoration: line-through;"><%= items[i].task %></p>
+                    <% } else { %>
+                        <p><%= items[i].task %></p>
+                    <% } %>
+                </div>
+            </div>
+            <div class="actions">
+                <button onclick="openModal('<%= items[i].task %>',<%= i %>)" class="btn-edit">Edit</button>
+                <a href="/delete-task?item=<%= i %>">
+                    <button class="btn-delete">
+                        Delete
+                    </button>
+                </a>
+                <div class="three-dot-menu" onclick="threeDotClick(<%= i %>)">
+                    <svg fill="#f1f1f1" height="20px" width="20px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 32.055 32.055" xml:space="preserve"><g>
+	<path d="M3.968,12.061C1.775,12.061,0,13.835,0,16.027c0,2.192,1.773,3.967,3.968,3.967c2.189,0,3.966-1.772,3.966-3.967
+		C7.934,13.835,6.157,12.061,3.968,12.061z M16.233,12.061c-2.188,0-3.968,1.773-3.968,3.965c0,2.192,1.778,3.967,3.968,3.967
+		s3.97-1.772,3.97-3.967C20.201,13.835,18.423,12.061,16.233,12.061z M28.09,12.061c-2.192,0-3.969,1.774-3.969,3.967
+		c0,2.19,1.774,3.965,3.969,3.965c2.188,0,3.965-1.772,3.965-3.965S30.278,12.061,28.09,12.061z"/>
+        </g>
+        </svg>  
+                <div class="menu-actions"  style="display: none;" id="task-menu-<%= i %>">
+                    <ul class="btn-list">
+                        <li onclick="openModal('<%= items[i].task %>',<%= i %>)">
+                            Edit                            
+                        </li>
+                        <li>
+                            <a href="/delete-task?item=<%= i %>">Delete</a>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+          <h2>Update Task</h2>
+          <form action="/update-task" method="post">
+            <input type="text" name="task" id="taskUpdateInput" placeholder="Enter task..." required />
+            <input type="hidden" name="index" id="taskIndex">
+            <button type="submit">Save</button>
+          </form>
+        </div>
+      </div>
+
+      <footer>
+        <p>Made with ❤️ to help you stay organized and productive.</p>
+        <p>&copy; 2025 Todo Master. All rights reserved.</p>      
+      </footer>
+
+
+      <script>
+
+        function threeDotClick(index){
+            console.log('test');
+            let menuDisplay = document.getElementById(`task-menu-${index}`).style.display;
+            if( menuDisplay == 'none'){
+                document.getElementById(`task-menu-${index}`).style.display = 'block';
+            } else {
+                document.getElementById(`task-menu-${index}`).style.display = 'none';
+
+            }
+        }
+
+        function udpateTaskStatus(elem, taskIndex){
+            elem.nextElementSibling.style.textDecoration = 'line-through';
+            elem.nextElementSibling.style.textDecorationColor = 'white';
+            window.location = '/update-task-status?index=' + taskIndex;
+        }
+
+        function openModal( task, index) {
+            console.log(task);
+            console.log(index);
+            document.getElementById("taskUpdateInput").value = task;
+            document.getElementById("taskIndex").value = index;
+          document.getElementById("modal").classList.add("show");
+        }
+      
+        function closeModal() {
+          document.getElementById("modal").classList.remove("show");
+        }
+      
+        function submitForm(e) {
+          e.preventDefault();
+          const task = document.getElementById("taskInput").value;
+          alert("Task saved: " + task);
+          closeModal();
+        }
+      </script>            
+
+</body>
+</html>
