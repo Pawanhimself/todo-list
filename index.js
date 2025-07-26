@@ -11,12 +11,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.static(path.join(__dirname, "public"))); 
-// In-memory database (Array)
+app.use(express.static(path.join(__dirname, "public")));
+
+// In-memory database (Array) with 'completed' status
 let todos = [
-    { id: uuidv4(), task: 'Learn Node.js', priority: 'High' },
-    { id: uuidv4(), task: 'Create a To-Do App', priority: 'Medium' },
-    { id: uuidv4(), task: 'Go for a run', priority: 'Low' }
+    { id: uuidv4(), task: 'Learn Node.js', priority: 'High', completed: false },
+    { id: uuidv4(), task: 'Create a To-Do App', priority: 'Medium', completed: true },
+    { id: uuidv4(), task: 'Go for a run', priority: 'Low', completed: false }
 ];
 
 // --- ROUTES ---
@@ -32,7 +33,7 @@ app.get('/todos', (req, res) => {
     }
 });
 
-// 2. Render form to create a new todo
+// 2. form view to create a new todo
 app.get('/todos/new', (req, res) => {
     res.render("new");
 });
@@ -41,10 +42,10 @@ app.get('/todos/new', (req, res) => {
 app.post('/todos', (req, res) => {
     const { task, priority } = req.body;
     if (task && task.trim() !== '') {
-        todos.push({ id: uuidv4(), task, priority });
+        // Add 'completed: false' to new todos
+        todos.push({ id: uuidv4(), task, priority, completed: false });
         res.redirect("/todos");
     } else {
-        // Simple alert mechanism via query parameter
         res.render("new", { error: "Task cannot be empty!" });
     }
 });
@@ -78,7 +79,19 @@ app.patch('/todos/:id', (req, res) => {
     }
 });
 
-// 6. Delete a todo
+// 6. mark todo as completed or uncompleted
+app.patch('/todos/:id/toggle', (req, res) => {
+    let { id } = req.params;
+    let todo = todos.find(t => t.id === id);
+    if (todo) {
+        todo.completed = !todo.completed;
+        res.redirect("/todos");
+    } else {
+        res.status(404).send("Todo not found");
+    }
+});
+
+// 7. Delete a todo
 app.delete('/todos/:id', (req, res) => {
     let { id } = req.params;
     todos = todos.filter(t => t.id !== id);
@@ -93,6 +106,7 @@ app.get('/', (req, res) => {
 
 
 const port = 8080;
-app.listen(port,'0.0.0.0', () => {
+app.listen(port, '0.0.0.0', () => { // Keep 0.0.0.0 for mobile testing
     console.log(`Server is running on http://localhost:${port}/todos`);
+    console.log(`Accessible on your network at: http://<YOUR_COMPUTER_IP>:${port}/todos`);
 });

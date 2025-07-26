@@ -28,14 +28,28 @@
         <div class="todo-container">
             <% if(todos.length > 0) { %>
                 <% for(let todo of todos) { %>
-                    <div class="todo-item priority-<%= todo.priority.toLowerCase() %>">
+                    <!-- Add 'completed' class if task is done -->
+                    <div class="todo-item priority-<%= todo.priority.toLowerCase() %> <%= todo.completed ? 'completed' : '' %>">
                         <div class="todo-content">
-                            <span class="task"><%= todo.task %></span>
-                            <span class="priority">(<%= todo.priority %>)</span>
+                            <!-- Checkbox form to toggle completion -->
+                            <form method="POST" action="/todos/<%= todo.id %>/toggle?_method=PATCH" class="complete-form">
+                                <input
+                                    type="checkbox"
+                                    class="complete-checkbox"
+                                    <%= todo.completed ? 'checked' : '' %>
+                                    onchange="this.form.submit()"
+                                    aria-label="Mark task as complete"
+                                >
+                            </form>
+                            <!-- Task text -->
+                            <div>
+                                <span class="task"><%= todo.task %></span>
+                                <span class="priority">(<%= todo.priority %>)</span>
+                            </div>
                         </div>
                         <div class="todo-actions">
                             <a href="/todos/<%= todo.id %>/edit" class="btn edit-btn">Edit</a>
-                            <form method="POST" action="/todos/<%= todo.id %>?_method=DELETE" style="display: inline;">
+                            <form method="POST" action="/todos/<%= todo.id %>?_method=DELETE" style="display: inline-block;">
                                 <button type="submit" class="btn delete-btn">Delete</button>
                             </form>
                         </div>

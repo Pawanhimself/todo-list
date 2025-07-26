@@ -1,13 +1,12 @@
-/* General Body Styling */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
   color: #333;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensures body takes full viewport height */
+  min-height: 100vh;
 }
 
 /* Header and Footer */
@@ -16,7 +15,7 @@ header, footer {
   color: #fff;
   text-align: center;
   padding: 1rem 0;
-  flex-shrink: 0; /* Prevents header/footer from shrinking */
+  flex-shrink: 0;
 }
 
 header h1 {
@@ -36,12 +35,11 @@ main {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  width: 100%; /* Ensures main takes up available width */
-  flex-grow: 1; /* Allows main to grow and push footer down */
-  box-sizing: border-box; /* Ensures padding is included in width */
+  width: 100%;
+  flex-grow: 1; 
+  box-sizing: border-box; 
 }
 
-/* Controls Section (Add button and Filter) */
 .controls {
   display: flex;
   justify-content: space-between;
@@ -64,7 +62,6 @@ main {
   font-size: 1rem;
 }
 
-/* Buttons */
 .btn {
   display: inline-block;
   padding: 0.6rem 1.2rem;
@@ -91,7 +88,6 @@ main {
 .cancel-btn:hover { background-color: #5a6268; }
 
 
-/* To-Do List Container */
 .todo-container {
   margin-top: 1rem;
 }
@@ -110,14 +106,39 @@ main {
   border-left-width: 5px;
 }
 
-/* Priority-based border colors */
 .priority-high { border-left-color: #dc3545; }
 .priority-medium { border-left-color: #ffc107; }
 .priority-low { border-left-color: #28a745; }
 
+.todo-item.completed {
+  background-color: #f9f9f9;
+  border-left-color: #6c757d;
+}
+
+.todo-item.completed .task,
+.todo-item.completed .priority {
+  text-decoration: line-through;
+  color: #888;
+}
 
 .todo-content {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem; 
   flex-grow: 1;
+  overflow: hidden;
+}
+
+.complete-form {
+  display: flex;
+  align-items: center;
+}
+
+.complete-checkbox {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
 }
 
 .task {
@@ -142,7 +163,6 @@ main {
   font-size: 1.1rem;
 }
 
-/* Form Styling */
 .form-container {
   padding: 2rem;
   background: #f9f9f9;
@@ -165,7 +185,7 @@ main {
   padding: 0.8rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-sizing: border-box; /* Important for padding and width */
+  box-sizing: border-box;
 }
 
 .form-actions {
@@ -174,7 +194,6 @@ main {
   justify-content: flex-end;
 }
 
-/* Alert Message */
 .alert {
   padding: 1rem;
   margin-bottom: 1rem;
@@ -188,11 +207,10 @@ main {
 }
 
 
-/* --- MOBILE RESPONSIVE IMPROVEMENTS --- */
+/* --- MOBILE RESPONSIVE CSS --- */
 @media (max-width: 600px) {
   body {
-      /* Add padding to prevent content from touching screen edges */
-      box-sizing: border-box;
+    box-sizing: border-box;
   }
 
   header h1 {
@@ -200,30 +218,44 @@ main {
   }
 
   main {
-      /* Reduce top/bottom margin on mobile */
-      margin: 1rem auto;
-      padding: 0.8rem;
+      margin: 1rem;
+      padding: 1rem;
   }
 
   .controls {
       flex-direction: column;
-      align-items: stretch; /* Make children (button, form) full width */
+      align-items: stretch;
+      gap: 1.5rem;
+  }
+
+  .filter-form {
+      display: block;
+  }
+
+  .filter-form label {
+      display: block;
+      margin-bottom: 0.5rem;
+  }
+
+  #priority {
+      width: 100%; 
   }
 
   .todo-item {
       flex-direction: column;
-      align-items: flex-start; /* Align content to the left */
+      align-items: flex-start;
+  }
+  
+  .todo-item .todo-content {
+      width: 100%;
   }
 
   .todo-actions {
       margin-top: 1rem;
-      width: 100%; /* Make action buttons container full width */
-      justify-content: flex-end; /* Push buttons to the right */
-  }
-  
-  .todo-actions .btn {
-      flex-grow: 1; /* Allow buttons to grow and fill space */
-      max-width: 120px; /* But not get excessively large */
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
   }
 
   .form-container {
@@ -235,7 +267,8 @@ main {
       gap: 0.8rem;
   }
 
-  .btn {
+  .controls > .btn,
+  .form-actions .btn {
       width: 100%;
       box-sizing: border-box;
   }
