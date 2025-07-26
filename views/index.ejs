@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>My To-Do List</h1>
+    </header>
+
+    <main>
+        <div class="controls">
+            <a href="/todos/new" class="btn add-btn">Add New To-Do</a>
+            <form action="/todos" method="GET" class="filter-form">
+                <label for="priority">Filter by Priority:</label>
+                <select name="priority" id="priority" onchange="this.form.submit()">
+                    <option value="All" <%= priority === 'All' ? 'selected' : '' %>>All</option>
+                    <option value="High" <%= priority === 'High' ? 'selected' : '' %>>High</option>
+                    <option value="Medium" <%= priority === 'Medium' ? 'selected' : '' %>>Medium</option>
+                    <option value="Low" <%= priority === 'Low' ? 'selected' : '' %>>Low</option>
+                </select>
+            </form>
+        </div>
+
+        <div class="todo-container">
+            <% if(todos.length > 0) { %>
+                <% for(let todo of todos) { %>
+                    <div class="todo-item priority-<%= todo.priority.toLowerCase() %>">
+                        <div class="todo-content">
+                            <span class="task"><%= todo.task %></span>
+                            <span class="priority">(<%= todo.priority %>)</span>
+                        </div>
+                        <div class="todo-actions">
+                            <a href="/todos/<%= todo.id %>/edit" class="btn edit-btn">Edit</a>
+                            <form method="POST" action="/todos/<%= todo.id %>?_method=DELETE" style="display: inline;">
+                                <button type="submit" class="btn delete-btn">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                <% } %>
+            <% } else { %>
+                <p class="empty-message">No to-dos found. Add one!</p>
+            <% } %>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 To-Do List App</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <div>
+            <h2>Todo App</h2>
+        </div>
+    </header>
+    <section class="new-task">
+        <div>
+            <form action="" method="post">
+                <div class="input-div">
+                    <input type="text" class="task-input" placeholder="Create video">
+                </div>
+                <div class="submit-btn-div">
+                    <button type="submit">Add task</button>
+                </div>
+            </form>
+        </div>
+        <div class="task-filter">
+            <select name="" id="">
+                <option value="">All</option>
+                <option value="">Pending</option>
+                <option value="">Completed</option>
+            </select>
+        </div>
+    </section>
+
+    <section class="task-list">
+        <div class="task-container">
+            <div class="task">
+                <div class="task-name">
+                    <h3>Task 2</h3>
+                </div>
+                <div class="task-actions">
+                    <button id="edit-btn">Edit</button>
+                    <button id="delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="edit-modal">
+        <div  class="modal-header">
+            <h2>Edit task</h2>
+        </div>
+        <div class="modal-body">
+            <form action="" method="post">
+                <div class="edit-input">
+                    <input type="text">
+                </div>
+                <div class="edit-submit-btn">
+                    <button type="submit">
+                        Edit task
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

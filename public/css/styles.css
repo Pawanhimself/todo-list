@@ -1,209 +1,242 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* General Body Styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures body takes full viewport height */
 }
 
-body{
-  background-color: #1f1f1f;
-}
-
-header{
-    background-color: #1f1f1f;
-    padding: 10px 10px;
-    color: white;
-    border-bottom: 3px solid #2c2c2c;
-}
-
-.task-input {
-  width: 30%;
-  padding: 10px;
-  font-size: 15px;
-  color: #e8eaed;
-  border: 2px solid #4d5156;
-  border-radius: 10px;
-  background-color: #4d5156;
-}
-
-.submit-btn {
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #0066ff;
-  color: white;
-  border: none;
-  margin-left: 2px;
-}
-
-.box {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
-
-.add-task {
-    margin: 10px;
-    padding: 10px;
-}
-
-
-
-.task-box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px;
-    margin: 10px 20px;
-    border: 2px solid #2c2c2c;
-    border-radius: 10px;    
-}
-
-.task {
-    display: flex;
-    align-items: center;
-}
-
-p {
-    padding-left: 20px;
-    color: white;
-}
-
-.btn-edit,
-.btn-delete {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-}
-
-.btn-delete {
-    background-color: red;
-    margin-left: 5px;
-}
-
-.btn-edit {
-    background-color: #0066ff;
-}
-
-   /* Modal overlay */
-   .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-  }
-
-  /* Modal box */
-  .modal {
-    background: #fff;
-    padding: 20px;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  }
-
-  .modal h2 {
-    margin-top: 0;
-  }
-
-  .modal form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .modal input[type="text"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .modal button {
-    padding: 10px;
-    background: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .modal button:hover {
-    background: #0056b3;
-  }
-
-  /* Show modal */
-  .modal-overlay.show {
-    display: flex;
-  }
-
-footer {
-  border-top: 3px solid #2c2c2c;
+/* Header and Footer */
+header, footer {
+  background-color: #333;
+  color: #fff;
   text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  padding: 10px;
+  padding: 1rem 0;
+  flex-shrink: 0; /* Prevents header/footer from shrinking */
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
 }
 
 footer p {
-  margin-top: 10px;
+  margin: 0;
 }
 
-.three-dot-menu {
-  display: none;
+/* Main Content Area */
+main {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 2rem auto;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 100%; /* Ensures main takes up available width */
+  flex-grow: 1; /* Allows main to grow and push footer down */
+  box-sizing: border-box; /* Ensures padding is included in width */
 }
 
-.btn-list {
-  padding: 5px 10px;
-  right: 20px;
-  background-color: #007bff;
-  position: absolute;
-  color: white;
+/* Controls Section (Add button and Filter) */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-form {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#priority {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  list-style: none;
+  font-size: 1rem;
 }
 
-.btn-list li {
-  margin-bottom: 2px;
-}
-
-a {
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
   text-decoration: none;
-  color: white;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  color: #fff;
+  text-align: center;
 }
-@media screen and (max-width: 480px) {
-  header {
-      display: flex;
-      justify-content: center;
+
+.add-btn { background-color: #28a745; }
+.add-btn:hover { background-color: #218838; }
+
+.edit-btn { background-color: #ffc107; color: #333; }
+.edit-btn:hover { background-color: #e0a800; }
+
+.delete-btn { background-color: #dc3545; }
+.delete-btn:hover { background-color: #c82333; }
+
+.cancel-btn { background-color: #6c757d; }
+.cancel-btn:hover { background-color: #5a6268; }
+
+
+/* To-Do List Container */
+.todo-container {
+  margin-top: 1rem;
+}
+
+.todo-item {
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-left-width: 5px;
+}
+
+/* Priority-based border colors */
+.priority-high { border-left-color: #dc3545; }
+.priority-medium { border-left-color: #ffc107; }
+.priority-low { border-left-color: #28a745; }
+
+
+.todo-content {
+  flex-grow: 1;
+}
+
+.task {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.priority {
+  font-size: 0.9rem;
+  color: #666;
+  margin-left: 0.5rem;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.empty-message {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* Form Styling */
+.form-container {
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Important for padding and width */
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+/* Alert Message */
+.alert {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  color: #fff;
+  text-align: center;
+}
+
+.alert.error {
+  background-color: #dc3545;
+}
+
+
+/* --- MOBILE RESPONSIVE IMPROVEMENTS --- */
+@media (max-width: 600px) {
+  body {
+      /* Add padding to prevent content from touching screen edges */
+      box-sizing: border-box;
   }
 
-  .task-input {
-    width: 100%;
+  header h1 {
+      font-size: 1.5rem;
   }
 
-  .submit-btn {
-    margin-top: 10px;
-    width: 100%;
+  main {
+      /* Reduce top/bottom margin on mobile */
+      margin: 1rem auto;
+      padding: 0.8rem;
   }
 
-  .btn-delete,
-  .btn-edit {
-    display: none;
+  .controls {
+      flex-direction: column;
+      align-items: stretch; /* Make children (button, form) full width */
   }
 
-  .three-dot-menu {
-    position: relative;
-    display: inline-block;
+  .todo-item {
+      flex-direction: column;
+      align-items: flex-start; /* Align content to the left */
+  }
+
+  .todo-actions {
+      margin-top: 1rem;
+      width: 100%; /* Make action buttons container full width */
+      justify-content: flex-end; /* Push buttons to the right */
+  }
+  
+  .todo-actions .btn {
+      flex-grow: 1; /* Allow buttons to grow and fill space */
+      max-width: 120px; /* But not get excessively large */
+  }
+
+  .form-container {
+      padding: 1rem;
+  }
+
+  .form-actions {
+      flex-direction: column;
+      gap: 0.8rem;
+  }
+
+  .btn {
+      width: 100%;
+      box-sizing: border-box;
   }
 }

@@ -1,16 +1,22 @@
 {
-  "name": "todo_list",
+  "name": "todo-list-app",
   "version": "1.0.0",
-  "description": "this is my first project ",
+  "description": "A simple to-do list application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "author": "Pawan Kumar",
+  "keywords": [
+    "todo",
+    "express",
+    "ejs"
+  ],
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^2.2.0",
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^4.19.2",
+    "method-override": "^3.0.0",
+    "uuid": "^9.0.1"
   }
 }
