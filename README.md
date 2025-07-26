@@ -1,3 +1,3 @@
-This is a basic web application that help to manage tasks. you can simple add task and once it's completed you can mark as complete.
-You can also delete or edit a particular task. also there is a filter task option when you can filter the tasks according to the task priority.
-here is the deploy link of todo web app: https://todo-master-ohq4.onrender.com
+This is a basic web application designed to help manage tasks. You can add a task, and once it's completed, you can mark it as complete.
+You can also delete or edit a particular task. Additionally, there is a filter task option that allows you to filter tasks by priority.
+Here is the deploy link of the todo web app: https://todo-list-3rlo.onrender.com/todos
